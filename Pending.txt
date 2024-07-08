@@ -1,0 +1,9 @@
+My course delete All course / select and then delete
+
+
+OPEN ROUTE  ---     all done
+Student -----       all done
+Instructor -----    all done 
+
+loading ----- done
+Remove all unneccessary console.log

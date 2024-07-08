@@ -1,0 +1,39 @@
+1. replace tag schema with category  -----> DONE
+
+2. populate both section and subsection 
+Ans> const course = await Course.findById(req.params.id)
+         .populate(
+            {
+             path: 'Section',
+             populate: {
+                path: 'Subsections'
+            }
+        });
+
+
+
+3. update and delete sub section -----> DONE
+
+
+4. Schedule request delete a/c after 5 days
+
+const cron = require('node-cron');
+
+        cron.schedule('0 0 */5 * * *', async () => {
+            try 
+            {
+                await User.findByIdAndDelete(userId);
+                
+            } catch (err) {
+                console.error('Error deleting user:', err);
+            }
+        }, {
+            scheduled: true,
+            timezone: "Asia/Kolkata" // Set your timezone here
+        });
+
+
+5.  unenroll this user from course 
+    if this is a student ---> studentEnroll me se hataoo [testing]
+    if this is a instructor ----> delete its all courses [testing]
+

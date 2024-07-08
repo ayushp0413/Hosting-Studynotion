@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+html , body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+.spinner {
+  width: 34px;
+  height: 34px;
+  border: 5px solid #FFF;
+  border-bottom-color: #0a65b0;
+  border-radius: 50%;
+  display: block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  }
+
+  @keyframes rotation {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+  } 
+
+.highlightText {
+        font-size: 2.25rem;
+        background: -webkit-linear-gradient(#1FA2FF, #A6FFCB);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+}
+
+.orangeGradient {
+        font-size: 2.25rem;
+        background: -webkit-linear-gradient(#ff6a1f, #f1c639);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+}
+
+.homepage_bg {
+    background: url("../src/assets/Images/bghome.svg");
+}
+
+
+.sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+  }
+
+  .overlay {
+    position: fixed;
+    background-color: #5f5f5f83;
+    top: 0;
+    opacity: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+    transition: 0.5s ease-in-out;
+    z-index: 200;
+  }
+
+  .overlayactive {
+    opacity: 1;
+    pointer-events: initial;
+    z-index: 20;
+  }
+
+  .rti--container {
+    background-color: darkslategray;
+  }
+
+  .custom-checkbox {
+    
+    /* appearance: none; */
+    border: 1px solid gray;
+    border-radius: 3px;
+
+  }
