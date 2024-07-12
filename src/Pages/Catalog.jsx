@@ -24,7 +24,6 @@ export default function Catalog() {
     setLoading(true);
     try{
       const res = await apiConnector("GET", catagories.CATAGORIES_API);
-      console.log("res: ", res);
       const category_id = res?.data?.data?.filter( (ct) => ct.name.split(" ").join("-").toLowerCase() === categoryName)[0]._id;
       setCategory(category_id);
     }catch(err)
@@ -39,7 +38,7 @@ export default function Catalog() {
     try
     {
       const res = await getCatalogPageData(categoryId);
-      console.log("Printing res asousahfihfdi gvhfhvdfhkdhfkbdfb: ", res);
+      console.log("Printing res : ", res);
       setCategoryPageData(res);
 
     }catch(err)
@@ -53,7 +52,6 @@ export default function Catalog() {
       getCategories();
   },[categoryName])
 
-  console.log("Category Id :" , categoryId);
 
   useEffect(() => {
       if(categoryId) {

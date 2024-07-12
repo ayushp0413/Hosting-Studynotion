@@ -17,9 +17,6 @@ exports.createCourse = async (req, res) => {
         const {courseName, courseDescription , price, whatWillYouLearn, category, tags, status, instructions} = req.body;
         const thumbnail = req.files.thumbnail;
 
-        console.log("Thumbnail : ", thumbnail);
-
-
         // validate
         if(!courseDescription || !courseName || !price || !whatWillYouLearn  ||  !category || !tags || !thumbnail) {
             return res.status(401).json({
@@ -48,8 +45,7 @@ exports.createCourse = async (req, res) => {
         const userId = req.user.id; // isko he add krdo schema me
 
         const instructorDetails = await Users.findById({_id: userId});
-        console.log("Instructor details ", instructorDetails);
-
+      
         if(!instructorDetails || instructorDetails.accountType!="Instructor") {
             return res.status(401).json({
                 success: false,
@@ -76,8 +72,6 @@ exports.createCourse = async (req, res) => {
             status: status,
             instructions:instructions,
         });
-
-        console.log("new course" , newCourse);
 
         
         // add course to user scchema of instructor
@@ -121,7 +115,6 @@ exports.publishCourse = async(req, res) => {
   try {
     const { courseId } = req.body
     const updates = req.body;
-    console.log("updates:", updates);
 
     const course = await Course.findById(courseId)
 
@@ -152,7 +145,7 @@ exports.publishCourse = async(req, res) => {
       })
       .exec()
 
-      console.log("Published course : ", updatedCourse);
+     
 
     res.json({
       success: true,
@@ -174,8 +167,7 @@ exports.publishCourse = async(req, res) => {
 exports.updateCourse = async (req, res) => {
     try{
 
-        // fetch details
-        
+        // fetch details   
         const {courseName, courseDescription , price, whatWillYouLearn, tag, category, status, instructions, courseId} = req.body;
         const thumbnail = req?.files?.thumbnail;
 
@@ -227,8 +219,6 @@ exports.updateCourse = async (req, res) => {
         const userId = req.user.id; // isko he add krdo schema me
 
         const instructorDetails = await Users.findById({_id: userId});
-        console.log("Instructor details ", instructorDetails);
-
         
         if(!instructorDetails || instructorDetails.accountType!="Instructor") {
             return res.status(401).json({
@@ -388,15 +378,7 @@ exports.getCourseDetails = async (req, res) => {
                                           },
                                       )
                                         .populate("category")
-                                        .populate(
-                                            {
-                                                path:"ratingAndReviews",
-                                                populate: {
-                                                    path: "user",
-                                                    path: "course",
-                                                }
-                                            }
-                                        )
+                                        .populate("ratingAndReviews")
                                         .populate(
                                             {
                                                 path:"courseContent",
@@ -407,7 +389,6 @@ exports.getCourseDetails = async (req, res) => {
                                             }
                                         ).exec();
 
-        console.log("Courses Data : ", course);
 
         if (!course) {
             return res.status(400).json({
@@ -447,12 +428,10 @@ exports.getCourseDetails = async (req, res) => {
 }
 
 
-
 // fully populated
 exports.getFullCourseDetails = async (req, res) => {
     try {
 
-      console.log("req body : ", req?.body);
       const {courseId} = req?.body;
       const userId = req.user.id;
 
@@ -489,16 +468,13 @@ exports.getFullCourseDetails = async (req, res) => {
           })
         }
         
-        console.log("full course details: ",courseDetails);
-  
       let courseProgressCount = await CourseProgess.findOne({
         courseId: courseId,
         userId: userId,
 
       })
   
-      console.log("courseProgressCount : ", courseProgressCount);
-
+    
       // calculating total duration
       let totalDurationInSeconds = 0;
       courseDetails?.courseContent.forEach((section) => {

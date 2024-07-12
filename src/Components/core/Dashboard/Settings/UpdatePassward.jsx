@@ -64,13 +64,13 @@ function UpdatePassward() {
                             </div>
 
                             <div className='flex flex-col gap-[2px]'>
-                                <label htmlFor='confirmpassword' className='text-richblack-400 text-sm'>Confirm Password</label>
+                                <label htmlFor='confirmpassword' className='text-richblack-400 text-sm'>New Password</label>
                                 <input 
                                     id='confirmpassword'
                                     name='newPassword'
                                     type='password' 
                                     {...register("newPassword", {required:true})}
-                                    placeholder='Enter confirm password' 
+                                    placeholder='Enter new password' 
                                     className='text-richblack-25 lg:max-w-[90%]
                                     outline-none bg-richblack-700 rounded-md py-3 px-3 border-b-[1px] border-richblack-400                            
                                 '/>

@@ -106,8 +106,7 @@ exports.getCategoryByName = async (req, res) => {
         }
 
 		const category = await Category.find({name : name});
-        console.log(category);
-
+    
         if(!category || category.length==0) {
             return res.status(404).json({
                 success: false,
@@ -151,8 +150,6 @@ exports.categoryPageDetails = async (req, res) => {
           })
           .exec()
 
-		console.log("Selected cata=egory course: " ,selectedCategory);
-
         if(!selectedCategory) {
             console.log("Category not found.");
 			return res
@@ -192,8 +189,6 @@ exports.categoryPageDetails = async (req, res) => {
 			differentCourses.push(...category.courses);
 		}
 
-        console.log("Defferent Category Course: ", differentCourses)
-
         // 3. top selling 
 
         const allCategories = await Category.find({})
@@ -209,11 +204,9 @@ exports.categoryPageDetails = async (req, res) => {
 
         const allCourses = allCategories.flatMap((category) => category.courses); // flatMap is similar to arr.map function , but each category may contains multiple courses so we used flatMap 
 
-        // but where is this sold property ????
-        
+        // but where is this sold property ???? 
         const mostSellingCourses = allCourses.sort( (a, b) => b.sold - a.sold).slice(0,10);
-        console.log("Most selling course :", mostSellingCourses);
-        
+      
 		res.status(200).json({
             success: true,
             data: {

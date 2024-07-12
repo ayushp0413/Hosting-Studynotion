@@ -8,8 +8,7 @@ function Course_Card({course, height, size}) {
 
   const reviewCount = course?.ratingAndReviews?.length; 
   const avgRating = GetAvgRating(course?.ratingAndReviews).toFixed(1);
-  console.log("avg ratinf: ", avgRating);
-
+ 
   return (
     <div className='flex flex-col gap-5rounded-lg'>
     <Link to={`/courses/${course?._id}`}>

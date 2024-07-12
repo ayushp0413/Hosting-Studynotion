@@ -1,6 +1,6 @@
 import React from "react";
 import { FooterLink2 } from "../../data/footer-links";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // Images
 import Logo from "../../assets/Logo/Logo-Full-Light.png";
@@ -23,6 +23,7 @@ const Plans = ["Paid memberships", "For students", "Business solutions"];
 const Community = ["Forums", "Chapters", "Events"];
 
 const Footer = () => {
+
   return (
     <div className="bg-richblack-800">
       
@@ -53,7 +54,7 @@ const Footer = () => {
                 <FaFacebook />
                 <FaGoogle />
                 <FaTwitter />
-                <FaYoutube />
+                <FaYoutube /> 
               </div>
               <div></div>
             </div>

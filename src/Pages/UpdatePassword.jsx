@@ -17,7 +17,6 @@ function UpdatePassword() {
     function submitHandler(e){
         e.preventDefault();
         const token =  location.pathname.split("/").at(-1).trim();
-        console.log(token);
         dispatch(resetPassword(password, confirmPassword, token, navigate));
     }
 

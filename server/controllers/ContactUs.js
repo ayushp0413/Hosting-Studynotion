@@ -28,8 +28,6 @@ exports.contact = async (req, res) => {
             message: message
         });
 
-        console.log("new contact" , newContact);
-
     
         return res.status(200).json({
             success:true,
@@ -51,9 +49,6 @@ exports.getAllContactUsMessages = async (req, res) => {
     try{
 
        const allMessages = await Contact.find({});
-
-       console.log("All Messages " , allMessages);
-
     
         return res.status(200).json({
             success:true,

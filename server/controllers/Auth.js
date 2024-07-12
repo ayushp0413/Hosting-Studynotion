@@ -266,8 +266,6 @@ exports.changePassword = async (req, res) => {
         // send email that password changed
         const body = passwordUpdate(exsistingUser);
         const response = await mailSender(email, "StudyNotion - Password Changed", body);
-        console.log("Password changed mail response ", response);
-
 
         return res.status(200).json({
             success: true,

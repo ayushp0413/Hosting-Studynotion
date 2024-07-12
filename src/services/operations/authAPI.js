@@ -18,15 +18,11 @@ export function sendOtp(email, navigate) {
    
    try {
 
-    console.log("Send opt route: ", SENDOTP_API);
       const response = await apiConnector("POST", SENDOTP_API, {
         email,
         checkUserPresent: true,
       })
 
-      console.log("SENDOTP API RESPONSE............", response)
-
-      console.log(response.data.success)
 
       if (!response.data.success) {
         throw new Error(response.data.message)
@@ -36,8 +32,8 @@ export function sendOtp(email, navigate) {
       navigate("/verify-email");
 
     } catch (error) {
-      console.log("SENDOTP API ERROR............", error)
-      toast.error("Could Not Send OTP")
+      console.log("SENDOTP API ERROR............", error?.response?.data.message)
+      toast.error(error?.response?.data.message || "Could not send OTP");
     }
     dispatch(setLoading(false))
     toast.dismiss(toastId)
@@ -69,8 +65,8 @@ export function signUp(accountType, firstName, lastName, email, password, confir
       navigate("/login")
     } catch (error) {
       console.log("SIGNUP API ERROR............", error)
-      toast.error("Signup Failed")
-      navigate("/login")
+      toast.error(error)
+      navigate("/login");
     }
     dispatch(setLoading(false))
     // toast.dismiss(toastId)
@@ -89,16 +85,13 @@ export function login(email, password, navigate) {
         password,
       })
 
-      console.log("LOGIN API RESPONSE............", response)
 
       if (!response.data.success) {
         throw new Error(response.data.message)
       }
 
       toast.success("Login Successful");
-      console.log("In login services : printing response ka user: ",response.data.exsistingUser);
       
-
       dispatch(setToken(response.data.token))
       const userImage = response.data?.exsistingUser?.image
         ? response.data.exsistingUser.image
@@ -126,8 +119,6 @@ export function getPasswordResetToken(email, setEmailSent) {
     try {
       const response = await apiConnector("POST", RESETPASSTOKEN_API, {email} );
 
-      console.log("rest passwrrd token response..", response)
-
       if (!response.data.success) {
         throw new Error(response.data.message)
       }
@@ -154,14 +145,13 @@ export function resetPassword(password, confirmPassword, token, navigate) {
         token,
       })
 
-      console.log("RESETPASSWORD RESPONSE............", response)
-
       if (!response.data.success) {
         throw new Error(response.data.message)
       }
 
       toast.success("Password Reset Successfully")
-      navigate("/login")
+      navigate("/login");
+
     } catch (error) {
       console.log("RESETPASSWORD ERROR............", error)
       toast.error("Failed To Reset Password")
@@ -173,7 +163,6 @@ export function resetPassword(password, confirmPassword, token, navigate) {
 
 export function logout(navigate) {
   return (dispatch) => {
-    console.log("Inside logout");
     dispatch(setToken(null))
     dispatch(setUser(null))
     // dispatch(resetCart())
@@ -181,6 +170,5 @@ export function logout(navigate) {
     localStorage.removeItem("user")
     toast.success("Logged Out")
     navigate("/");
-    console.log("Done log out");
   }
 }

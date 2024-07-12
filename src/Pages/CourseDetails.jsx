@@ -354,8 +354,6 @@ function CourseDetails() {
           </div>
 
 
-          <h1>Reviews</h1>
-
           <div className='w-11/12 mx-auto max-w-maxContent flex flex-col items-center xl:items-start gap-6 mb-12 text-richblack-25'>
             <h1 className='text-3xl text-center font-semibold'>More Courses by {instructor?.firstName} {instructor?.lastName} </h1>
             <div className='grid grid-cols-1 lg:grid-cols-2 gap-4 '>
