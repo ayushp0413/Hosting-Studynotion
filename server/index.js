@@ -49,5 +49,5 @@ cloudinaryConnect();
 
 // default route
 app.get("/", (req,res)=>{
-    res.send(`<h1> This is default page of Study Notion </h1>`);
+    res.send(`<p> This is default page of Study Notion </p>`);
 })
