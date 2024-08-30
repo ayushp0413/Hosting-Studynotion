@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import "../../App.css";
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import logo from "../../assets/Logo/Logo-Full-Light.png"
 import {NavbarLinks} from "../../data/navbar-links"
@@ -12,9 +13,10 @@ import toast from 'react-hot-toast'
 import { apiConnector } from '../../services/apiConnector'
 import { catagories } from '../../services/apis'
 import ProfileDropdownComponent from '../core/Auth/ProfileDropdownComponent'
-import { BiCross } from 'react-icons/bi'
+import { BiCross, BiHandicap } from 'react-icons/bi'
 import { CgClose } from 'react-icons/cg'
 import { fetchCourseCategories } from '../../services/operations/courseDetailsAPI'
+
 
 function Navbar() {
 
@@ -25,7 +27,6 @@ function Navbar() {
     const searchRef = useRef(null); 
     const [category, setCategory] = useState([]);
     const [displaySearchItems, setDisplaySearchItems] = useState([]);
-
 
     const {token} = useSelector((state) => state.auth);
     const {user} = useSelector((state) => state.profile); // login k time set kiya hai services me se
@@ -66,7 +67,6 @@ function Navbar() {
         }
     }
 
-
     useEffect(()=> {
         fetchSubLinks();
         fetchCategories();
@@ -79,8 +79,13 @@ function Navbar() {
         }
     },[searchBar])
 
+    const MenuRef = useRef(null);
+    const handleMenu = () => MenuRef.current.classList.toggle("show__menu");
+
+
   return (
     <div className='fixed top-0 left-0 z-50 w-screen  flex flex-col gap-y-12 h-14 items-center bg-richblack-800 justify-center border-b-[1px] border-richblack-700'>
+        
         <div className='w-11/12 max-w-maxContent flex flex-row justify-between items-center'>
 
             {/* LOGO */}
@@ -91,8 +96,8 @@ function Navbar() {
             </div>
 
             {/* NAVLINKS */}
-            <nav className='relative flex'>
-                <ul className='opacity-0 hidden md:opacity-100 md:flex flex-row gap-3 items-center text-richblack-25'>
+            <nav ref={MenuRef} onClick={handleMenu} className='menu'>
+                <ul className='md:opacity-100 md:flex flex-row gap-3 items-center text-richblack-25'>
                     {
                         NavbarLinks.map( (link , index) => {
                             return (
@@ -146,10 +151,10 @@ function Navbar() {
                        )
                     }
                 </ul>
-                <div className='opacity-100  md:opacity-0 md:hidden'>
-                    <p className='text-2xl text-white   '><RxHamburgerMenu /></p>
-                </div>
             </nav>
+            <span onClick={handleMenu} className=' text-white text-2xl text-smallTextColor md:hidden cursor-pointer'>
+                <RxHamburgerMenu/>
+            </span>
 
             {/* LOGIN/SIGNUP BUTTONS */}
              
